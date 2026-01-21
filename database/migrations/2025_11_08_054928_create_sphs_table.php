@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+
+    public function up(): void
+    {
+        Schema::create('surat_penawarans', function (Blueprint $table) {
+            $table->id();
+            $table->string('nomor_sph')->unique(); 
+            $table->date('tanggal')->nullable();
+            $table->string('tempat')->nullable();
+            $table->string('lampiran')->nullable();
+            $table->string('hal')->nullable();
+            $table->string('jabatan_tujuan')->nullable();
+            $table->string('nama_perusahaan');
+            $table->json('detail_barang'); 
+            $table->integer('total_keseluruhan');
+            $table->string('penandatangan');
+            $table->timestamps();
+
+            
+        $table->enum('status', ['Menunggu', 'Diterima', 'Ditolak'])
+              ->default('Menunggu');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('sphs');
+    }
+};
