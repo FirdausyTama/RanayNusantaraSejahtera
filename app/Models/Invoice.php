@@ -19,6 +19,7 @@ class Invoice extends Model
     'harga_per_kg',
     'estimasi_ongkir',
     'penandatangan',
+    'user_id',
     ];
 
     protected $casts = [
@@ -29,6 +30,11 @@ class Invoice extends Model
     public function pembelian()
     {
         return $this->belongsTo(Pembelian::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function items()

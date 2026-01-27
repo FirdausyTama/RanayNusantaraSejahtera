@@ -1187,7 +1187,6 @@ async function submitUpdateStok() {
 
     formData.append("jumlah", document.getElementById("editJumlah").value);
     formData.append("tgl_masuk", document.getElementById("editTglMasuk").value);
-    formData.append("user_id", 1);
 
     formData.append("kode_sku", document.getElementById("editKodeSKU").value);
     formData.append("merek", document.getElementById("editMerek").value);

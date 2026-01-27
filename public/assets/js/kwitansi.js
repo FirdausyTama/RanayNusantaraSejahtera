@@ -309,6 +309,9 @@ function renderKwitansi(data, startNo = 1) {
                 ${formatRupiah(item.total_pembayaran || 0)}
             </td>
             <td class="text-center">
+                <span class="badge bg-light text-dark border">${item.user ? item.user.name : '-'}</span>
+            </td>
+            <td class="text-center">
                 <div class="d-flex justify-content-center gap-1">
                     <a href="print-kwitansi/${item.id}" class="btn btn-sm btn-light border" title="Print Kwitansi">
                         <i class="mdi mdi-printer text-dark"></i>

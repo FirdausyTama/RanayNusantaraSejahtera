@@ -255,6 +255,7 @@
                                                     <th scope="col">Customer</th>
                                                     <th scope="col" class="text-center">Total Penjualan</th>
                                                     <th scope="col" class="text-center">Status Pembayaran</th>
+                                                    <th scope="col" class="text-center">Dibuat Oleh</th>
                                                     <th scope="col" class="text-center" >Aksi</th>
                                                 </tr>
                                             </thead>

@@ -24,6 +24,7 @@ class SPH extends Model
         'penandatangan',
         'status',
         'keterangan',
+        'user_id',
     ];
 
     protected $casts = [
@@ -34,5 +35,10 @@ class SPH extends Model
     public function lampiranGambar()
     {
         return $this->hasMany(SphLampiranGambar::class, 'sph_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

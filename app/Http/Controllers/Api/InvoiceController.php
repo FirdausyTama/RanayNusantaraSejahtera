@@ -12,7 +12,7 @@ class InvoiceController extends Controller
     public function index()
     {
         return response()->json(
-            Invoice::with('items')->orderBy('id', 'desc')->get()
+            Invoice::with(['items', 'user'])->orderBy('id', 'desc')->get()
         );
     }
 
@@ -97,6 +97,7 @@ class InvoiceController extends Controller
             'estimasi_ongkir' => $estimasiOngkir,
 
             'penandatangan' => $penandatangan,
+            'user_id' => auth()->id(),
         ]);
 
         $totalPembayaran = 0;
@@ -147,7 +148,7 @@ class InvoiceController extends Controller
     public function show($id)
     {
         return response()->json(
-            Invoice::with('items')->findOrFail($id)
+            Invoice::with(['items', 'user'])->findOrFail($id)
         );
     }
 

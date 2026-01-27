@@ -16,7 +16,7 @@ class PembelianController extends Controller
     public function index(Request $request)
     {
         $status = $request->status;
-        $query = Pembelian::with(['items', 'cicilan'])->latest();
+        $query = Pembelian::with(['items', 'cicilan', 'user'])->latest();
 
         if ($status) {
             $query->where('status_pembayaran', $status);
@@ -69,6 +69,7 @@ class PembelianController extends Controller
                 'sisa_cicilan' => $sisaTagihan, // FIX
                 'tenor' => $tenor,
                 'nilai_cicilan' => 0,             // diupdate nanti
+                'user_id' => auth()->id(),
             ]);
 
             foreach ($request->items as $item) {
@@ -132,7 +133,7 @@ class PembelianController extends Controller
 
     public function show($id)
     {
-        $pembelian = Pembelian::with(['items', 'cicilan'])->find($id);
+        $pembelian = Pembelian::with(['items', 'cicilan', 'user'])->find($id);
         if (!$pembelian) {
             return response()->json(['error' => 'Data tidak ditemukan'], 404);
         }

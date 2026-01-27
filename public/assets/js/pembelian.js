@@ -331,6 +331,9 @@ function renderPembelian(data, startIndex = 0) {
                 </td>
                 <td class="text-center">${badgePembayaran}</td>
                 <td class="text-center">
+                    <span class="badge bg-light text-dark border">${item.user ? item.user.name : '-'}</span>
+                </td>
+                <td class="text-center">
                 <div class="d-flex justify-content-center gap-1">
                     <button class="btn btn-sm btn-light border" onclick="detailPembelian(${item.id
             })" title="Detail">

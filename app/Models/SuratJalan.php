@@ -18,6 +18,12 @@ class SuratJalan extends Model
         'nama_barang_jasa',
         'qty',
         'jumlah',
-        'nama_pengirim'
+        'nama_pengirim',
+        'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

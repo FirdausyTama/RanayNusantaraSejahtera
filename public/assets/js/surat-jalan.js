@@ -162,6 +162,9 @@ function renderTable(data, startNo = 1) {
             <td>${item.nama_barang_jasa || "-"}</td>
             <td class="text-center">${item.qty || "0"}</td>
             <td class="text-center">
+                <span class="badge bg-light text-dark border">${item.user ? item.user.name : '-'}</span>
+            </td>
+            <td class="text-center">
                 <div class="d-flex justify-content-center gap-1">
                     <a href="print-surat-jalan/${item.id}" class="btn btn-sm btn-light border" title="Print Surat Jalan">
                         <i class="mdi mdi-printer text-dark"></i>

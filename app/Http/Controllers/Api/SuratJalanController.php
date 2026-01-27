@@ -10,7 +10,7 @@ class SuratJalanController extends Controller
 {
     public function index()
     {
-        $data = SuratJalan::latest()->get();
+        $data = SuratJalan::with('user')->latest()->get();
         return response()->json($data);
     }
 
@@ -34,6 +34,8 @@ class SuratJalanController extends Controller
             $validated['tanggal'] = date('Y-m-d'); 
         }
 
+        $validated['user_id'] = auth()->id();
+
         $sj = SuratJalan::create($validated);
 
         return response()->json([
@@ -44,7 +46,7 @@ class SuratJalanController extends Controller
 
     public function show($id)
     {
-        $sj = SuratJalan::findOrFail($id);
+        $sj = SuratJalan::with('user')->findOrFail($id);
         return response()->json($sj);
     }
 

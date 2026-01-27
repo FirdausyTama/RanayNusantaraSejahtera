@@ -13,7 +13,7 @@ class SPHController extends Controller
 {
     public function index()
     {
-        return response()->json(SPH::all());
+        return response()->json(SPH::with('user')->latest()->get());
     }
 
     public function store(Request $request)
@@ -36,6 +36,7 @@ class SPHController extends Controller
         ]);
 
         $data['tanggal'] = $data['tanggal'] ?? Carbon::now()->toDateString();
+        $data['user_id'] = auth()->id();
 
         $tahun = date('Y', strtotime($data['tanggal']));
         $bulan = date('n', strtotime($data['tanggal']));
@@ -128,7 +129,7 @@ class SPHController extends Controller
 
     public function show($id)
     {
-        $sph = SPH::with('lampiranGambar')->findOrFail($id);
+        $sph = SPH::with(['lampiranGambar', 'user'])->findOrFail($id);
 
         // DEBUG: Uncomment line below to check data
         // dd($sph->lampiranGambar);

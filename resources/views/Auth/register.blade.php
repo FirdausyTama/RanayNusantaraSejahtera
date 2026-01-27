@@ -160,7 +160,7 @@
 
         <div class="text-center mt-3 text-small">
           Anda sudah punya akun?
-          <a href="/" class="text-warning">Login Disini</a>
+          <a href="/login" class="text-warning">Login Disini</a>
         </div>
       </form>
     </div>

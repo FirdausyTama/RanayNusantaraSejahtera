@@ -102,6 +102,7 @@
                         <th>Nama Klien</th>
                         <th>Keterangan Pembayaran</th>
                         <th class="text-center">Total Pembayaran</th>
+                        <th class="text-center">Dibuat Oleh</th>
                         <th class="text-center" style="width: 100px;">Aksi</th>
                       </tr>
                     </thead>

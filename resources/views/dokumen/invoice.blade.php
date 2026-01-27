@@ -105,6 +105,7 @@
                         <th class="text-center">Tanggal</th>
                         <th>Nama Perusahaan</th>
                         <th class="text-center">Nilai Tagihan</th>
+                        <th class="text-center">Dibuat Oleh</th>
                         <th class="text-center" style="width: 100px;">Aksi</th>
                       </tr>
                     </thead>

@@ -29,6 +29,7 @@ class Pembelian extends Model
         'total_cicilan',
         'sisa_cicilan',
         'grand_total',
+        'user_id',
     ];
 
     /**
@@ -39,6 +40,11 @@ class Pembelian extends Model
     public function items()
     {
         return $this->hasMany(PembelianItem::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function invoice()

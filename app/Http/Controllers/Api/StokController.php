@@ -53,7 +53,6 @@ class StokController extends Controller
             'berat' => 'nullable|numeric|min:0',
             'tgl_masuk' => 'required|date',
             'tgl_keluar' => 'nullable|date|after_or_equal:tgl_masuk',
-            'user_id' => 'required|exists:users,id',
         ]);
 
         if ($request->hasFile('foto')) {
@@ -67,6 +66,7 @@ class StokController extends Controller
             $validated['video'] = $request->file('video')->store('stok/video', 'public');
         }
 
+        $validated['user_id'] = auth()->id();
         $stok = Stok::create($validated);
 
         if ($request->hasFile('fotos')) {
@@ -128,7 +128,6 @@ class StokController extends Controller
             'berat' => 'nullable|numeric|min:0',
             'tgl_masuk' => 'required|date',
             'tgl_keluar' => 'nullable|date|after_or_equal:tgl_masuk', // Fixed validation rule
-            'user_id' => 'required|exists:users,id',
         ]);
 
         if ($request->hasFile('foto')) {
@@ -139,6 +138,7 @@ class StokController extends Controller
             $validated['video'] = $request->file('video')->store('stok/video', 'public');
         }
 
+        $validated['user_id'] = auth()->id();
         $stok->update($validated);
 
         if ($request->hasFile('fotos')) {

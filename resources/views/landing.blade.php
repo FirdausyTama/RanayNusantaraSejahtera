@@ -96,6 +96,26 @@
             opacity: 0.5;
         }
 
+        /* Gradient overlay for smooth transition */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to bottom, 
+                rgba(191, 219, 254, 0) 0%,
+                rgba(219, 234, 254, 0.3) 20%,
+                rgba(239, 246, 255, 0.5) 40%,
+                rgba(249, 250, 251, 0.7) 60%,
+                rgba(255, 255, 255, 0.9) 80%,
+                rgba(255, 255, 255, 1) 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
         .badge-custom {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
@@ -484,12 +504,75 @@
             }
 
             .footer {
-                padding: 60px 0 30px;
+                padding: 40px 0 30px;
+            }
+
+            .footer .row {
+                row-gap: 1.5rem !important;
             }
 
             .footer h6 {
-                font-size: 1rem;
-                margin-top: 1.5rem;
+                font-size: 0.85rem;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+                font-weight: 700;
+            }
+
+            .footer .footer-logo-section {
+                margin-bottom: 0;
+                text-align: center;
+            }
+
+            .footer .footer-logo-section .d-flex {
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 0.75rem;
+                margin-bottom: 0.75rem !important;
+            }
+
+            .footer .footer-logo-section img {
+                margin-right: 0 !important;
+                height: 35px !important;
+            }
+
+            .footer .footer-logo-section h5 {
+                font-size: 0.9rem;
+                text-align: center;
+            }
+
+            .footer .footer-logo-section p {
+                font-size: 0.8rem;
+                margin-bottom: 0;
+            }
+
+            /* 3 kolom horizontal untuk Tautan, Layanan, Alamat */
+            .footer .col-4 {
+                text-align: left;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+
+            .footer ul {
+                padding-left: 0;
+                margin-bottom: 0;
+            }
+
+            .footer ul li {
+                margin-bottom: 0.4rem !important;
+            }
+
+            .footer ul li:last-child {
+                margin-bottom: 0 !important;
+            }
+
+            .footer ul li a {
+                font-size: 0.8rem;
+            }
+
+            .footer .footer-address {
+                font-size: 0.75rem;
+                margin-bottom: 0;
+                line-height: 1.6 !important;
             }
 
             .floating-img {
@@ -539,9 +622,10 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="container position-relative">
+        <div class="container position-relative" style="z-index: 2;">
             <div class="row align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0 fade-in-up">
+                <!-- Text Content - Order 1 on mobile, Order 1 on desktop -->
+                <div class="col-lg-6 order-1 order-lg-1 fade-in-up">
                     <span class="badge-custom">
                         <i class="bi bi-shield-check me-2"></i>Distributor Resmi & Terpercaya
                     </span>
@@ -552,7 +636,8 @@
                     <p class="hero-subtitle">
                         Partner terpercaya untuk kebutuhan peralatan medis radiologi Anda. Kami menyediakan produk berkualitas tinggi dengan layanan konsultasi profesional untuk rumah sakit dan fasilitas kesehatan.
                     </p>
-                    <div class="d-flex gap-3 flex-wrap">
+                    <!-- Buttons on desktop only -->
+                    <div class="d-none d-lg-flex gap-3 flex-wrap">
                         <a href="#contact" class="btn btn-primary-custom">
                             <i class="bi bi-whatsapp me-2"></i>Hubungi Kami
                         </a>
@@ -561,8 +646,22 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-6 text-center">
-                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/medical-team-illustration-download-in-svg-png-gif-file-formats--doctor-hospital-healthcare-staff-pack-people-illustrations-4609386.png" alt="Medical Equipment" class="img-fluid floating-img" style="max-width: 85%;">
+                
+                <!-- Image - Order 2 on mobile, Order 2 on desktop -->
+                <div class="col-lg-6 text-center order-2 order-lg-2 mb-4 mb-lg-0">
+                    <img src="{{ asset('assets/images/TaeAugust19.jpg') }}" alt="Medical Equipment" class="img-fluid floating-img" style="max-width: 85%;">
+                </div>
+                
+                <!-- Buttons on mobile only - Order 3 -->
+                <div class="col-12 d-lg-none order-3">
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="#contact" class="btn btn-primary-custom">
+                            <i class="bi bi-whatsapp me-2"></i>Hubungi Kami
+                        </a>
+                        <a href="#products" class="btn btn-outline-custom">
+                            Lihat Produk <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -684,7 +783,7 @@
     <footer class="footer">
         <div class="container">
             <div class="row gy-4">
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-12 footer-logo-section">
                     <div class="d-flex align-items-center mb-3">
                         <img src="{{ asset('assets/images/hp-logo.png') }}" alt="Logo RNS" height="45" class="me-3 bg-white rounded p-2">
                         <h5 class="mb-0 fw-bold">PT. Ranay Nusantara Sejahtera</h5>
@@ -693,7 +792,7 @@
                         Mitra terpercaya dalam penyediaan alat kesehatan radiologi berkualitas untuk menunjang pelayanan kesehatan Indonesia.
                     </p>
                 </div>
-                <div class="col-lg-2 offset-lg-1">
+                <div class="col-lg-2 offset-lg-1 col-4">
                     <h6>Tautan</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a href="#">Beranda</a></li>
@@ -702,7 +801,7 @@
                         <li><a href="{{ route('login') }}">Login Staff</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-2 col-4">
                     <h6>Layanan</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a href="#">Alat Radiologi</a></li>
@@ -710,9 +809,9 @@
                         <li class="mb-2"><a href="#">Maintenance</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-4">
                     <h6>Alamat</h6>
-                    <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.8;">
+                    <p class="footer-address" style="color: rgba(255, 255, 255, 0.8); line-height: 1.8;">
                         Jl. Raya Serang - Jakarta Km. 6,5<br>
                         Kepuren Residence, Kota Serang<br>
                         Banten - 42183

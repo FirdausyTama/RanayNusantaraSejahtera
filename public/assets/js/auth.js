@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
                 showAlert("success", "Register berhasil!");
-                setTimeout(() => (window.location.href = "/"), 1500);
+                setTimeout(() => (window.location.href = "/login"), 1500);
             } catch (err) {
                 const errorStatus = err.status || err?.statusCode;
                 if (errorStatus === 422) {

@@ -10,7 +10,7 @@ class KwitansiController extends Controller
 {
     public function index()
     {
-        return response()->json(Kwitansi::all());
+        return response()->json(Kwitansi::with('user')->latest()->get());
     }
 
     public function store(Request $request)
@@ -62,6 +62,7 @@ class KwitansiController extends Controller
             'total_pembayaran' => $data['total_pembayaran'],
             'total_bilangan' => $total_bilangan,
             'keterangan' => $data['keterangan'] ?? null,
+            'user_id' => auth()->id(),
         ]);
 
         return response()->json([
@@ -72,7 +73,7 @@ class KwitansiController extends Controller
 
     public function show($id)
     {
-        return response()->json(Kwitansi::findOrFail($id));
+        return response()->json(Kwitansi::with('user')->findOrFail($id));
     }
 
     public function update(Request $request, $id)

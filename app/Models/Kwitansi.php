@@ -18,10 +18,16 @@ class Kwitansi extends Model
         'total_bilangan',
         'keterangan',
         'status',
+        'user_id',
     ];
 
 
     protected $casts = [
         'tanggal' => 'date',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

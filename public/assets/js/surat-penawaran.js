@@ -159,6 +159,9 @@ function renderSPH(page = 1) {
                 Rp${total.toLocaleString("id-ID")}
             </td>
             <td class="text-center">
+                <span class="badge bg-light text-dark border">${item.user ? item.user.name : '-'}</span>
+            </td>
+            <td class="text-center">
                 <select class="form-select form-select-sm status-dropdown" 
                         data-id="${item.id}" 
                         onchange="updateStatusDropdown(this)"

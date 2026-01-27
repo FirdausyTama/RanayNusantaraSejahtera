@@ -124,6 +124,7 @@
                                                 <th class="text-center">Tanggal</th>
                                                 <th>Nama Perusahaan</th>
                                                 <th class="text-center">Nilai Penawaran</th>
+                                                <th class="text-center">Dibuat Oleh</th>
                                                 <th class="text-center">Status</th>
                                                 <th class="text-center" style="width: 100px;">Aksi</th>
                                             </tr>

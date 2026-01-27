@@ -374,6 +374,9 @@ function renderPaginatedInvoice() {
                 Rp${Number(total).toLocaleString("id-ID")}
             </td>
             <td class="text-center">
+                <span class="badge bg-light text-dark border">${item.user ? item.user.name : '-'}</span>
+            </td>
+            <td class="text-center">
                 <div class="d-flex justify-content-center gap-1">
                     <button class="btn btn-sm btn-light border" onclick="printInvoice(${item.id})" title="Print">
                         <i class="mdi mdi-printer text-dark"></i>

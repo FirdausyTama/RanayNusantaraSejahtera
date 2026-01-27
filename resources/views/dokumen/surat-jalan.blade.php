@@ -98,6 +98,7 @@
                         <th>Alamat Penerima</th>
                         <th>Nama Barang/Jasa</th>
                         <th class="text-center">QTY</th>
+                        <th class="text-center">Dibuat Oleh</th>
                         <th class="text-center" style="width: 100px;">Aksi</th>
                       </tr>
                     </thead>
