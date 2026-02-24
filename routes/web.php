@@ -28,7 +28,7 @@ Route::get('/logout', function () {
 |--------------------------------------------------------------------------
 */
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard.dashboard');
 });
 
 
@@ -38,13 +38,13 @@ Route::get('/dashboard', function () {
 |--------------------------------------------------------------------------
 */
 Route::get('/kelola-stok', function () {
-    return view('kelola-stok');
+    return view('stok.kelola-stok');
 });
 Route::get('/riwayat-pembelian', function () {
-    return view('riwayat-pembelian');
+    return view('pembelian.riwayat-pembelian');
 });
 Route::get('/kelola-pembelian', function () {
-    return view('kelola-pembelian');
+    return view('pembelian.kelola-pembelian');
 });
 
 

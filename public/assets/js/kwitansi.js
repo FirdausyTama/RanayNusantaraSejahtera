@@ -1,7 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     loadKwitansi();
-    loadPembelianList();
-    loadInvoices();
+
+    // Chain loading to ensure Invoice data is ready before Pembelian list
+    loadInvoices().then(() => {
+        loadPembelianList();
+    });
 
 
     const btnSimpan = document.getElementById("btnSimpanKwitansi");
@@ -61,9 +64,20 @@ function loadPembelianList() {
                     const noOrder = item.no_order || `Order #${item.id}`;
                     const nama = item.penerima_nama || item.nama_perusahaan || 'Tanpa Nama';
                     const tanggal = item.tgl_transaksi ? new Date(item.tgl_transaksi).toLocaleDateString('id-ID') : '-';
-                    const amount = item.grand_total ? `Rp ${Number(item.grand_total).toLocaleString('id-ID')}` : '';
 
-                    select.append(`<option value="${item.id}">${noOrder} - ${nama} - ${tanggal} (${amount})</option>`);
+                    // Check for associated invoice
+                    const invoice = allInvoiceData.find(inv => inv.pembelian_id == item.id);
+                    let displayAmount = item.grand_total;
+                    let infoText = "";
+
+                    if (invoice) {
+                        displayAmount = invoice.total_pembayaran || invoice.total_tagihan || 0;
+                        infoText = ` [INV: ${invoice.nomor_invoice}]`;
+                    }
+
+                    const amount = displayAmount ? `Rp ${Number(displayAmount).toLocaleString('id-ID')}` : '';
+
+                    select.append(`<option value="${item.id}" data-has-invoice="${!!invoice}">${noOrder}${infoText} - ${nama} - ${tanggal} (${amount})</option>`);
                 });
 
                 // Initialize Select2
@@ -72,7 +86,16 @@ function loadPembelianList() {
                     width: '100%',
                     dropdownParent: $('#modalTambahKwitansi'),
                     placeholder: '-- Pilih Pembelian --',
-                    allowClear: true
+                    allowClear: true,
+                    templateResult: function (data) {
+                        if (!data.id) return data.text;
+                        var $element = $(data.element);
+                        var hasInvoice = $element.data('has-invoice');
+                        if (hasInvoice) {
+                            return $('<span>' + data.text + ' <span class="badge bg-success ms-1">Invoice</span></span>');
+                        }
+                        return data.text;
+                    }
                 });
 
                 // Handle Change Event via Select2
@@ -88,15 +111,32 @@ function loadPembelianList() {
                             const invoice = allInvoiceData.find(inv => inv.pembelian_id == pembelianId);
 
                             let total = 0;
+                            let keteranganStr = "";
+
                             if (invoice) {
-                                total = invoice.total_tagihan || invoice.total_pembayaran || invoice.grand_total || 0;
+                                // Prioritize Invoice Amount
+                                total = invoice.total_pembayaran || invoice.total_tagihan || invoice.grand_total || 0;
+                                keteranganStr = `Pembayaran Invoice ${invoice.nomor_invoice}`;
+
+                                // Override nama/alamat from invoice if available
+                                if (invoice.nama_penerima) $('#namaPenerima').val(invoice.nama_penerima);
+                                else $('#namaPenerima').val(nama);
+
+                                // Alamat might not be in invoice payload fully, keep purchase address or check invoice
+                                // Invoice model has nama_penerima but maybe not alamat_penerima explicitly unless added?
+                                // Based on InvoiceController, it has 'nama_penerima' but 'alamat_penerima' not in top level of store payload
+                                // So we keep purchase address
+                                $('#alamatPenerima').val(alamat);
+
                             } else {
                                 total = selected.grand_total || 0;
+                                keteranganStr = `Pembayaran Pembelian ${selected.no_order || ''}`;
+                                $('#namaPenerima').val(nama);
+                                $('#alamatPenerima').val(alamat);
                             }
 
-                            $('#namaPenerima').val(nama);
-                            $('#alamatPenerima').val(alamat);
                             $('#totalPembayaran').val(parseInt(total).toLocaleString('id-ID'));
+                            $('#keteranganPembayaran').val(keteranganStr);
 
                             // Trigger terbilang update logic manually if needed (not seen in snippet but good practice)
                             $('#totalBilangan').val(terbilang(total) + ' Rupiah');
@@ -106,6 +146,7 @@ function loadPembelianList() {
                         $('#alamatPenerima').val('');
                         $('#totalPembayaran').val('');
                         $('#totalBilangan').val('');
+                        $('#keteranganPembayaran').val('');
                     }
                 });
             }
@@ -118,9 +159,9 @@ function terbilang(a) { a = Math.abs(a); var b = ["", "Satu", "Dua", "Tiga", "Em
 
 function loadInvoices() {
     const token = getToken();
-    if (!token) return;
+    if (!token) return Promise.reject("No Token"); // Return promise
 
-    fetch(API_INVOICE, {
+    return fetch(API_INVOICE, {
         method: "GET",
         headers: {
             "Authorization": "Bearer " + token,
@@ -130,6 +171,7 @@ function loadInvoices() {
         .then(res => res.json())
         .then(data => {
             allInvoiceData = data;
+            return data; // Return data for chaining
         })
         .catch(err => console.error("Error loading invoice list:", err));
 }

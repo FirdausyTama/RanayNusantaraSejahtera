@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('riwayat_stoks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('stok_id')->constrained('stoks')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->string('jenis'); // tambah_baru, restock, koreksi_tambah, kurang_penjualan, koreksi_kurang
             $table->integer('jumlah');
             $table->decimal('harga_satuan', 15, 2); // Harga per unit saat itu

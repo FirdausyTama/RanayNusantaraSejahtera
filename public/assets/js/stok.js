@@ -150,7 +150,19 @@ async function loadStok() {
 
         const data = await res.json();
         allStok = data.data || [];
-    } catch (err) { }
+    } catch (err) {
+        console.error("Error loading stok:", err);
+        Swal.fire({
+            icon: 'error',
+            title: 'Koneksi Gagal',
+            text: 'Tidak dapat terhubung ke server/database! Pastikan server menyala.',
+            confirmButtonText: 'Coba Lagi'
+        }).then((res) => {
+            if (res.isConfirmed) {
+                location.reload();
+            }
+        });
+    }
     filteredStok = [...allStok];
     renderTable(1);
     updateSummary(allStok);

@@ -104,6 +104,21 @@
     .input-group .toggle-password:hover {
       background-color: #f8f9fa;
     }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        background-color: #0d3b91;
+      }
+      .left-side {
+        display: none;
+      }
+      .right-side {
+        width: 100%;
+        min-height: 100vh;
+        padding: 20px;
+      }
+    }
   </style>
 </head>
 

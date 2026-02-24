@@ -18,7 +18,7 @@ return new class extends Migration
                 Schema::table($table, function (Blueprint $table) {
                     $table->unsignedBigInteger('user_id')->nullable()->after('id');
                     // Optional: Foreign key constraint if you want strict integrity
-                    // $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+                    $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
                 });
             }
         }

@@ -299,7 +299,7 @@
             <i class="mdi mdi-plus"></i>
         </button>
 
-        @include('tambah-pembelian')
+        @include('pembelian.tambah-pembelian')
 
         
         <div class="modal fade" id="detailPembelianModal" tabindex="-1" aria-labelledby="detailPembelianLabel" aria-hidden="true">

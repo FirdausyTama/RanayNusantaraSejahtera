@@ -50,7 +50,7 @@
     </div>
 
     
-    <span id="user-name" class="ms-1 fw-semibold text-dark d-lg-inline">
+    <span id="user-name" class="ms-1 fw-semibold text-dark d-none d-lg-inline">
       User
     </span>
   </a>

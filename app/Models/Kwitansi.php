@@ -19,6 +19,7 @@ class Kwitansi extends Model
         'keterangan',
         'status',
         'user_id',
+        'pembelian_id',
     ];
 
 
@@ -29,5 +30,10 @@ class Kwitansi extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function pembelian()
+    {
+        return $this->belongsTo(Pembelian::class);
     }
 }

@@ -10,7 +10,7 @@ class KwitansiController extends Controller
 {
     public function index()
     {
-        return response()->json(Kwitansi::with('user')->latest()->get());
+        return response()->json(Kwitansi::with(['user', 'pembelian'])->latest()->get());
     }
 
     public function store(Request $request)
@@ -22,8 +22,8 @@ class KwitansiController extends Controller
             'total_pembayaran' => 'required|numeric',
             'keterangan' => 'nullable|string',
             'tanggal' => 'nullable|date',
+            'pembelian_id' => 'nullable|exists:pembelians,id',
         ]);
-
         
         $tanggal = $data['tanggal'] ?? now()->format('Y-m-d');
 
@@ -63,6 +63,7 @@ class KwitansiController extends Controller
             'total_bilangan' => $total_bilangan,
             'keterangan' => $data['keterangan'] ?? null,
             'user_id' => auth()->id(),
+            'pembelian_id' => $data['pembelian_id'] ?? null,
         ]);
 
         return response()->json([
