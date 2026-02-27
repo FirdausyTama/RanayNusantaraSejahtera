@@ -33,9 +33,9 @@ let itemsPerPage = 10;
 let currentFilter = 'Semua Waktu';
 let currentSearch = '';
 
-const API_KWITANSI = "http://127.0.0.1:8000/api/kwitansi";
-const API_PEMBELIAN_LIST = "http://127.0.0.1:8000/api/pembelians";
-const API_INVOICE = "http://127.0.0.1:8000/api/invoice";
+const API_KWITANSI = "/api/kwitansi";
+const API_PEMBELIAN_LIST = "/api/pembelians";
+const API_INVOICE = "/api/invoice";
 let allInvoiceData = [];
 
 function loadPembelianList() {

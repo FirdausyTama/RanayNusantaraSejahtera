@@ -630,7 +630,7 @@
                 const token = localStorage.getItem("token"); // Use global getToken if available or this
                 // If API_URL is not defined in this scope, we can reconstruct it or use the one from stok.js if loaded.
                 // Assuming standard API path:
-                const API_STOK = "http://127.0.0.1:8000/api/stoks";
+                const API_STOK = "/api/stoks";
 
                 fetch(API_STOK, {
                     method: "GET",

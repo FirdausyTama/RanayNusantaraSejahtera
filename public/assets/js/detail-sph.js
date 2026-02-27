@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-const API_INVOICE = "http://127.0.0.1:8000/api/invoice";
-const API_STOK = "http://127.0.0.1:8000/api/stoks";
+const API_INVOICE = "/api/invoice";
+const API_STOK = "/api/stoks";
 let editInvoiceItemsData = [];
 let stokData = [];
 

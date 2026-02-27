@@ -595,7 +595,7 @@
 
     function loadInvoiceDetail(id) {
       const token = localStorage.getItem('token');
-      const API_INVOICE = `http://127.0.0.1:8000/api/invoice/${id}`;
+      const API_INVOICE = `/api/invoice/${id}`;
 
       fetch(API_INVOICE, {
         method: 'GET',

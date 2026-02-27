@@ -1,4 +1,4 @@
-const API_SPH = "http://127.0.0.1:8000/api/surat-penawaran";
+const API_SPH = "/api/surat-penawaran";
 
 function getToken() {
     return localStorage.getItem("token");

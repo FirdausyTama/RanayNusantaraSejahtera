@@ -66,9 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-const API_PEMBELIAN_URL = "http://127.0.0.1:8000/api/pembelians";
-const API_STOK_URL = "http://127.0.0.1:8000/api/stoks";
-const API_CICILAN_URL = "http://127.0.0.1:8000/api/cicilan-pembelians";
+const API_PEMBELIAN_URL = "/api/pembelians";
+const API_STOK_URL = "/api/stoks";
+const API_CICILAN_URL = "/api/cicilan-pembelians";
 let allPembelianData = [];
 let baseData = [];
 let filteredData = [];
@@ -1564,7 +1564,7 @@ function bayarCicilan(id, parentId) {
         if (!result.isConfirmed) return;
         const token = getToken();
 
-        fetch(`http://127.0.0.1:8000/api/cicilan-pembelians/${id}`, {
+        fetch(`/api/cicilan-pembelians/${id}`, {
             method: "PUT",
             headers: {
                 Authorization: "Bearer " + token,
@@ -1627,7 +1627,7 @@ function loadAcceptedSPH() {
     // Reset dropdown
     selectSPH.innerHTML = '<option value="">-- Pilih SPH Diterima --</option>';
 
-    fetch('http://127.0.0.1:8000/api/surat-penawaran/accepted', {
+    fetch('/api/surat-penawaran/accepted', {
         headers: {
             'Authorization': 'Bearer ' + token,
             'Accept': 'application/json'

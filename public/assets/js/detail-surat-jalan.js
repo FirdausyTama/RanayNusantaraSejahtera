@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-const API_SURAT_JALAN = "http://127.0.0.1:8000/api/surat-jalan";
+const API_SURAT_JALAN = "/api/surat-jalan";
 
 function getToken() {
     return localStorage.getItem("token");

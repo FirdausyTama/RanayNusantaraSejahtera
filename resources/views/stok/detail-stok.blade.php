@@ -260,7 +260,7 @@
                 return;
             }
             try {
-                const res = await fetch(`http://127.0.0.1:8000/api/stoks/${stokId}`, {
+                const res = await fetch(`/api/stoks/${stokId}`, {
                     headers: {
                         "Authorization": "Bearer " + token,
                         "Accept": "application/json"
@@ -297,7 +297,7 @@
                 const noMedia = document.getElementById('noMediaPlaceholder');
                 
                 if (data.foto) {
-                    document.getElementById('fotoProduk').src = `http://127.0.0.1:8000/storage/${data.foto}`;
+                    document.getElementById('fotoProduk').src = `/storage/${data.foto}`;
                     fotoContainer.style.display = 'block';
                     hasMedia = true;
                 } else {
@@ -306,7 +306,7 @@
                 
                 if (data.video) {
                     const vid = document.getElementById('videoProduk');
-                    vid.querySelector('source').src = `http://127.0.0.1:8000/storage/${data.video}`;
+                    vid.querySelector('source').src = `/storage/${data.video}`;
                     vid.load();
                     videoContainer.style.display = 'block';
                     hasMedia = true;
@@ -372,7 +372,7 @@
                 if (result.isConfirmed) {
                     const token = localStorage.getItem("token");
                     try {
-                        const res = await fetch(`http://127.0.0.1:8000/api/stoks/${id}`, {
+                        const res = await fetch(`/api/stoks/${id}`, {
                             method: 'DELETE',
                             headers: {
                                 "Authorization": "Bearer " + token,

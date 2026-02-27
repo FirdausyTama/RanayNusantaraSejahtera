@@ -1,0 +1,29 @@
+const CACHE_NAME = 'rns-pwa-v1';
+const urlsToCache = [
+    '/',
+    '/assets/images/hp-logo.png',
+    '/assets/images/favicon.ico',
+    '/assets/images/TaeAugust19.jpg'
+];
+
+self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then(cache => {
+                return cache.addAll(urlsToCache);
+            })
+    );
+});
+
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.match(event.request)
+            .then(response => {
+                // Cache hit - return response
+                if (response) {
+                    return response;
+                }
+                return fetch(event.request);
+            })
+    );
+});

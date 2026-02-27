@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
     loadPembelianList();
 });
 
-const API_INVOICE = "http://127.0.0.1:8000/api/invoice";
-const API_PEMBELIAN_LIST = "http://127.0.0.1:8000/api/invoice/pembelian-list";
+const API_INVOICE = "/api/invoice";
+const API_PEMBELIAN_LIST = "/api/invoice/pembelian-list";
 
 function getToken() {
     const token = localStorage.getItem("token");

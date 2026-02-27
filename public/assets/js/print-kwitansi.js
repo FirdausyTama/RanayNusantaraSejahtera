@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-const API_KWITANSI = "http://127.0.0.1:8000/api/kwitansi";
+const API_KWITANSI = "/api/kwitansi";
 
 function getToken() {
     return localStorage.getItem("token");

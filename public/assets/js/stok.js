@@ -1,5 +1,5 @@
-window.API_URL = window.API_URL || "http://127.0.0.1:8000/api/stoks";
-const API_PEMBELIAN_URL = "http://127.0.0.1:8000/api/pembelians";
+window.API_URL = window.API_URL || "/api/stoks";
+const API_PEMBELIAN_URL = "/api/pembelians";
 
 
 function getToken() {
@@ -23,7 +23,7 @@ async function loadExpenditureStats() {
     if (!token) return;
 
     try {
-        const res = await fetch("http://127.0.0.1:8000/api/stoks/expenditure-stats", {
+        const res = await fetch("/api/stoks/expenditure-stats", {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + token,
@@ -197,14 +197,14 @@ function renderTable(page = 1) {
         let fotoPath = "assets/images/logo-sm.png";
 
         if (item.images && item.images.length > 0) {
-            fotoPath = `http://127.0.0.1:8000/storage/${item.images[0].image_path}`;
+            fotoPath = `/storage/${item.images[0].image_path}`;
         } else if (item.stok_fotos && item.stok_fotos.length > 0) {
             // Handle stok_fotos structure (could be objects or strings)
             const first = item.stok_fotos[0];
             const path = typeof first === 'object' ? (first.filename || first.foto) : first;
-            fotoPath = `http://127.0.0.1:8000/storage/${path}`;
+            fotoPath = `/storage/${path}`;
         } else if (item.foto) {
-            fotoPath = `http://127.0.0.1:8000/storage/${item.foto}`;
+            fotoPath = `/storage/${item.foto}`;
         }
 
         const hargaNumber = Number(item.harga) || 0;
@@ -426,7 +426,7 @@ function bulkDeleteStok() {
 
 function openDetailModal(id) {
 
-    const apiUrl = `http://127.0.0.1:8000/api/stoks/${id}`;
+    const apiUrl = `/api/stoks/${id}`;
 
     const modal = new bootstrap.Modal(
         document.getElementById("detailStokModal")
@@ -478,7 +478,7 @@ function openDetailModal(id) {
 
 function renderDetailStokModal(data, id) {
 
-    const storageBaseUrl = `http://127.0.0.1:8000/storage`;
+    const storageBaseUrl = `/storage`;
     const contentDiv = document.getElementById("detailStokContent");
 
     let fotos = [];
@@ -742,7 +742,7 @@ async function loadStokSummary() {
     if (!token) return;
 
     try {
-        const res = await fetch("http://127.0.0.1:8000/api/stoks/summary", {
+        const res = await fetch("/api/stoks/summary", {
             method: "GET",
             headers: {
                 Authorization: "Bearer " + token,
@@ -1127,7 +1127,7 @@ async function openEditModal(id) {
                     col.id = `existing-img-${img.id}`;
                     col.innerHTML = `
                         <div class="border rounded p-1" style="height: 100px; overflow: hidden; position: relative;">
-                            <img src="http://127.0.0.1:8000/storage/${img.image_path}" style="width: 100%; height: 100%; object-fit: cover;" class="rounded">
+                            <img src="/storage/${img.image_path}" style="width: 100%; height: 100%; object-fit: cover;" class="rounded">
                             <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 p-0 d-flex justify-content-center align-items-center" 
                                     style="width: 20px; height: 20px; border-radius: 50%; font-size: 12px; margin: 2px;"
                                     onclick="deleteStokImage(${img.id})" title="Hapus Foto">
@@ -1144,7 +1144,7 @@ async function openEditModal(id) {
                 col.className = "col-4 position-relative existing-image-item";
                 col.innerHTML = `
                     <div class="border rounded p-1" style="height: 100px; overflow: hidden; position: relative;">
-                        <img src="http://127.0.0.1:8000/storage/${data.data.foto}" style="width: 100%; height: 100%; object-fit: cover;" class="rounded">
+                        <img src="/storage/${data.data.foto}" style="width: 100%; height: 100%; object-fit: cover;" class="rounded">
                         <span class="badge bg-secondary position-absolute bottom-0 start-0 m-1" style="font-size: 10px;">Tersimpan</span>
                     </div>
                 `;
@@ -1162,7 +1162,7 @@ async function openEditModal(id) {
         if (data.data.video) {
             document.getElementById(
                 "editVideoElement"
-            ).src = `http://127.0.0.1:8000/storage/${data.data.video}`;
+            ).src = `/storage/${data.data.video}`;
             document.getElementById("editVideoName").textContent =
                 data.data.video.split("/").pop();
             document.getElementById("editVideoPreview").style.display = "block";
@@ -1330,7 +1330,7 @@ function submitTambahStok() {
     const video = document.getElementById("uploadVideo").files[0];
     if (video) formData.append("video", video);
 
-    fetch("http://127.0.0.1:8000/api/stoks", {
+    fetch("/api/stoks", {
         method: "POST",
         headers: {
             Authorization: "Bearer " + token,

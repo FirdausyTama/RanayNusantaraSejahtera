@@ -22,7 +22,7 @@ let itemsPerPage = 10;
 let currentFilter = 'Semua Waktu';
 let currentSearch = '';
 
-const API_SURAT_JALAN = "http://127.0.0.1:8000/api/surat-jalan";
+const API_SURAT_JALAN = "/api/surat-jalan";
 let kwitansiData = [];
 
 function getToken() {

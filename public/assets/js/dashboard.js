@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     loadDashboardData();
 });
 
-const API_BASE_URL = "http://127.0.0.1:8000/api";
+const API_BASE_URL = "/api";
 const ENDPOINT_PEMBELIAN = `${API_BASE_URL}/pembelians`;
 const ENDPOINT_STOK = `${API_BASE_URL}/stoks`;
 

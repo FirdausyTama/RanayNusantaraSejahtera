@@ -376,7 +376,7 @@
 
     function loadSPH(id) {
       const token = localStorage.getItem('token');
-      fetch(`http://127.0.0.1:8000/api/surat-penawaran/${id}`, {
+      fetch(`/api/surat-penawaran/${id}`, {
         method: 'GET',
         headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/json' }
       })
